@@ -10,7 +10,7 @@ inf_limit_clients <- 1000
 sup_limit_clients <- 20000
 clients_step <- 100
 
-# transaction sizes in bytes
+# transaction volumes in bytes
 
 common_fields <- 110
 cp <- common_fields
@@ -46,7 +46,7 @@ for(beta in beta_vals){
 	data$Z <- data$Z/1024^2
 
 	pdf(paste("data_melhor_caso-b", beta * 100, ".pdf", sep = ""))
-	print(levelplot(Z ~ X*Y, data=data , cuts = 100, xlab="Active clients", ylab="Providers", main= TeX(sprintf("Storaged data size(MB) - Best Case - $\\beta = %.1f$", beta)), col.regions = rainbow(100), panel = panel.levelplot.raster))
+	print(levelplot(Z ~ X*Y, data=data , cuts = 100, xlab="Active clients", ylab="Providers", main= TeX(sprintf("Storaged data volume(MB) - Best Case - $\\beta = %.1f$", beta)), col.regions = rainbow(100), panel = panel.levelplot.raster))
 	dev.off()
 
 	# worst case (m > max p)
@@ -61,7 +61,7 @@ for(beta in beta_vals){
 	data$Z <- data$Z/1024^4
 
 	pdf(paste("data_pior_caso-b", beta * 100, ".pdf", sep = ""))
-	print(levelplot(Z ~ X*Y, data=data , cuts = 100, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Storaged data size(TB) - Worst Case (m $\\geq$ p) - $\\beta = %.1f$", beta)), col.regions = rainbow(100), panel = panel.levelplot.raster))
+	print(levelplot(Z ~ X*Y, data=data , cuts = 100, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Storaged data volume(TB) - Worst Case (m $\\geq$ p) - $\\beta = %.1f$", beta)), col.regions = rainbow(100), panel = panel.levelplot.raster))
 	dev.off()
 
 	# worst case (m < p)
@@ -76,7 +76,7 @@ for(beta in beta_vals){
 	data$Z <- data$Z/1024^3
 
 	pdf(paste("data_pior_caso_menor-b", beta * 100, ".pdf", sep = ""))
-	print(levelplot(Z ~ X*Y, data=data , cuts = 100, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Storaged data size(GB) - Worst Case (m < p) - $\\beta = %.1f$", beta)), col.regions = rainbow(100), panel = panel.levelplot.raster))
+	print(levelplot(Z ~ X*Y, data=data , cuts = 100, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Storaged data volume(GB) - Worst Case (m < p) - $\\beta = %.1f$", beta)), col.regions = rainbow(100), panel = panel.levelplot.raster))
 	dev.off()
 
 	# # worst case (mix)
@@ -102,7 +102,7 @@ for(beta in beta_vals){
 	data$Z <- data$Z/1024^4
 
 	pdf(paste("data_pior_caso_mix-b", beta * 100, ".pdf", sep = ""))
-	print(levelplot(Z ~ X*Y, data=data , cuts = 100, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Storaged data size(GB) - Worst Case (m = 500) - $\\beta = %.1f$", beta)), col.regions = rainbow(100), panel = panel.levelplot.raster))
+	print(levelplot(Z ~ X*Y, data=data , cuts = 100, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Storaged data volume(TB) - Worst Case (m = 500) - $\\beta = %.1f$", beta)), col.regions = rainbow(100), panel = panel.levelplot.raster))
 	dev.off()
 
 }
