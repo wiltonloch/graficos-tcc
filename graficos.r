@@ -14,7 +14,7 @@ clients_step <- 100
 beta_vals <- c(0.5)
 
 # amount of microservices
-m <- 10
+m <- 50
 
 providers <- seq(inf_limit_providers, sup_limit_providers, providers_step)
 clients <- seq(inf_limit_clients, sup_limit_clients, clients_step)
@@ -37,7 +37,7 @@ for(beta in beta_vals){
 	# worst case (m < p)
 	data$Z <- providers + clients * ((m * (2 * providers - m + 3))/2 + beta * (1 + (m * clients)/providers) + 2)
 	pdf(paste("pior_caso_menor-b", beta * 100, ".pdf", sep = ""))
-	print(levelplot(Z ~ X*Y, data=data , cuts = 100, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Number of issued transactions - Worst Case (m < p) - $\\beta = %.1f", beta)), col.regions = rainbow(100), panel = panel.levelplot.raster))
+	print(levelplot(Z ~ X*Y, data=data , cuts = 100, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Number of issued transactions - Worst Case (m = 50) - $\\beta = %.1f", beta)), col.regions = rainbow(100), panel = panel.levelplot.raster))
 	dev.off()
 
 	# worst case (mix)
