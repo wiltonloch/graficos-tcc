@@ -1,5 +1,5 @@
 library("lattice")
-library("viridisLite")
+library("RColorBrewer")
 library("latex2exp")
  
 inf_limit_providers <- 100
@@ -21,23 +21,25 @@ clients <- seq(inf_limit_clients, sup_limit_clients, clients_step)
 data <- expand.grid(X=clients, Y=providers)
 providers <- rep(providers, each = length(clients))
 
+cor <- colorRampPalette(rev(brewer.pal(8, "RdYlBu")))(51)
+
 for(beta in beta_vals){
 	# best case
 	data$Z <- providers + clients * (beta * (providers + clients)/providers + 4)
 	pdf(paste("melhor_caso-b", beta * 100, ".pdf", sep = ""))
-	print(levelplot(Z ~ X*Y, data=data , cuts = 100, xlab="Active clients", ylab="Providers", main= TeX(sprintf('Number of issued transactions - Best Case - $\\beta$ = %.1f$', beta)), col.regions = rainbow(100), panel = panel.levelplot.raster))
+	print(levelplot(Z ~ X*Y, data=data , cuts = 50, xlab="Active clients", ylab="Providers", main= TeX(sprintf('Number of issued transactions - Best Case - $\\beta$ = %.1f$', beta)), col.regions = cor, panel = panel.levelplot.raster))
 	dev.off()
 
 	# worst case (m > max p)
 	data$Z <- providers + clients * ((providers^2 + 3 * providers)/2 + beta * (1 + clients) + 2)
 	pdf(paste("pior_caso-b", beta * 100, ".pdf", sep = ""))
-	print(levelplot(Z ~ X*Y, data=data , cuts = 100, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Number of issued transactions - Worst Case (m $\\geq$ p) - $\\beta = %.1f", beta)), col.regions = rainbow(100), panel = panel.levelplot.raster))
+	print(levelplot(Z ~ X*Y, data=data , cuts = 50, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Number of issued transactions - Worst Case (m $\\geq$ p) - $\\beta = %.1f", beta)), col.regions = cor, panel = panel.levelplot.raster))
 	dev.off()
 
 	# worst case (m < p)
 	data$Z <- providers + clients * ((m * (2 * providers - m + 3))/2 + beta * (1 + (m * clients)/providers) + 2)
 	pdf(paste("pior_caso_menor-b", beta * 100, ".pdf", sep = ""))
-	print(levelplot(Z ~ X*Y, data=data , cuts = 100, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Number of issued transactions - Worst Case (m = 50) - $\\beta = %.1f", beta)), col.regions = rainbow(100), panel = panel.levelplot.raster))
+	print(levelplot(Z ~ X*Y, data=data , cuts = 50, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Number of issued transactions - Worst Case (m = 50) - $\\beta = %.1f", beta)), col.regions = cor, panel = panel.levelplot.raster))
 	dev.off()
 
 	# worst case (mix)
@@ -48,7 +50,7 @@ for(beta in beta_vals){
 	data$Z <- c(lower_m[1:threshold], upper_m[(threshold + 1):length(data$X)])
 
 	pdf(paste("pior_caso_mix-b", beta * 100, ".pdf", sep = ""))
-	print(levelplot(Z ~ X*Y, data=data , cuts = 100, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Number of issued transactions - Worst Case (m = 500) - $\\beta = %.1f", beta)), col.regions = rainbow(100), panel = panel.levelplot.raster))
+	print(levelplot(Z ~ X*Y, data=data , cuts = 50, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Number of issued transactions - Worst Case (m = 500) - $\\beta = %.1f", beta)), col.regions = cor, panel = panel.levelplot.raster))
 	dev.off()
 
 
