@@ -50,7 +50,7 @@ cor <- colorRampPalette(rev(brewer.pal(8, "RdYlBu")))(51)
 	# tail(data, 1000)
 
 	pdf(paste("data_melhor_caso-b", beta * 100, ".pdf", sep = ""))
-	print(levelplot(Z ~ X*Y, data=data , cuts = 50, xlab="Active clients", ylab="Providers", main= TeX(sprintf("Storaged data volume(MB) - Best Case - $\\beta = %.1f$", beta)), col.regions = cor, panel = panel.levelplot.raster))
+	print(levelplot(Z ~ X*Y, data=data , cuts = 50, xlab="Active clients", ylab="Providers", main= TeX(sprintf("Storage data volume(MB) - Best Case - $\\beta = %.1f$", beta)), col.regions = cor, panel = panel.levelplot.raster))
 	dev.off()
 
 	# worst case (m > max p)
@@ -66,7 +66,7 @@ cor <- colorRampPalette(rev(brewer.pal(8, "RdYlBu")))(51)
 	# tail(data)
 
 	pdf(paste("data_pior_caso-b", beta * 100, ".pdf", sep = ""))
-	print(levelplot(Z ~ X*Y, data=data , cuts = 50, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Storaged data volume(TB) - Worst Case (m $\\geq$ p) - $\\beta = %.1f$", beta)), col.regions = cor, panel = panel.levelplot.raster))
+	print(levelplot(Z ~ X*Y, data=data , cuts = 50, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Storage data volume(TB) - Worst Case (m $\\geq$ p) - $\\beta = %.1f$", beta)), col.regions = cor, panel = panel.levelplot.raster))
 	dev.off()
 
 	# worst case (m < p)
@@ -82,7 +82,7 @@ cor <- colorRampPalette(rev(brewer.pal(8, "RdYlBu")))(51)
 	# tail(data)
 
 	pdf(paste("data_pior_caso_menor-b", beta * 100, ".pdf", sep = ""))
-	print(levelplot(Z ~ X*Y, data=data , cuts = 50, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Storaged data volume(GB) - Worst Case (m = 50) - $\\beta = %.1f$", beta)), col.regions = cor, panel = panel.levelplot.raster))
+	print(levelplot(Z ~ X*Y, data=data , cuts = 50, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Storage data volume(GB) - Worst Case (m = 50) - $\\beta = %.1f$", beta)), col.regions = cor, panel = panel.levelplot.raster))
 	dev.off()
 
 	# # worst case (mix)
@@ -109,7 +109,7 @@ cor <- colorRampPalette(rev(brewer.pal(8, "RdYlBu")))(51)
 	# tail(data)
 
 	pdf(paste("data_pior_caso_mix-b", beta * 100, ".pdf", sep = ""))
-	print(levelplot(Z ~ X*Y, data=data , cuts = 50, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Storaged data volume(TB) - Worst Case (m = 500) - $\\beta = %.1f$", beta)), col.regions = cor, panel = panel.levelplot.raster))
+	print(levelplot(Z ~ X*Y, data=data , cuts = 50, xlab="Active clients", ylab="Providers", main=TeX(sprintf("Storage data volume(TB) - Worst Case (m = 500) - $\\beta = %.1f$", beta)), col.regions = cor, panel = panel.levelplot.raster))
 	dev.off()
 
 # }
